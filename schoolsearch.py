@@ -78,6 +78,12 @@ def main():
             else:
                 gradeLevel(students, int(user_input[1]))
 
+        elif (user_input[0] == "D:" or user_input[0] == "Data:"):
+            if (user_input[1] == "G" or user_input[1] == "Grade"):
+                if(user_input[2] == "A" or user_input[2] == "Average"):
+                    calculateMeanGPA(students, teachers, "level")
+
+
 
 def studentInfo(students, teachers, name):
     dataFromStudents = students.loc[students["lastName"] == name][
@@ -160,6 +166,12 @@ def minMaxGradeLevel(students, teachers, grade, flag):
 
 def studentsPerGrade(students, grade):
     print(grade, ": ", len(students.loc[students["grade"] == grade].values))
+
+def calculateMeanGPA(students, teachers, field):
+    if field == "level":
+        for i in range(0, 7):
+            print("Average GPA of grade ", i, ": ", students.loc[students["grade"] == i]["GPA"].mean())
+
 
 
 if __name__ == "__main__":
