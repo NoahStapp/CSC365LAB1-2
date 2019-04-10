@@ -77,6 +77,19 @@ def main():
                     minMaxGradeLevel(students, int(user_input[1]), "min")
             else:
                 gradeLevel(students, int(user_input[1]))
+        elif(user_input[0] == "G:" or user_input[0] == "Grade:" and (user_input[
+            1] == "Teachers" or user_input[
+            1] == "T")):
+            teachersPerGrade(students, teachers, int(user_input[2]))
+        elif (user_input[0] == "C:" or user_input[0] == "Classroom:"):
+            if(user_input[1] == "Students" or user_input[1] == "S"):
+                studentsPerClassroom(students, teachers, int(user_input[2]))
+            elif(user_input[1] == "Teachers" or user_input[1] == "T"):
+                teachersPerClassroom(students, teachers, int(user_input[2]))
+        elif(user_input[0] == "E" or user_input[0] == "Enrollment"):
+            enrollmentByClassroom(students, teachers)
+
+            
 
 
 def studentInfo(students, teachers, name):
@@ -161,6 +174,25 @@ def minMaxGradeLevel(students, grade, flag):
 
 def studentsPerGrade(students, grade):
     print(grade, ": ", len(students.loc[students["grade"] == grade].values))
+
+# NR-1
+def studentsPerClassroom(students, teachers, classroom): 
+    student = students.loc[students['classroom'] == classroom][['lastName', 'firstName']]
+    print(student.values)
+    
+# NR-2
+def teachersPerClassroom(students, teachers, classroom):
+    teacher = teachers.loc[teachers['classroom'] == classroom][['lastName', 'firstName']]
+    print(teacher.values)
+
+# NR-3
+def teachersPerGrade(students, teachers, grade):
+    classrooms = list(set(students[students['grade'] == grade]['classroom'].values))
+    print(teachers[teachers['classroom'].isin(classrooms)].values)
+
+# NR-4
+def enrollmentByClassroom(students, teachers):
+    print(students['classroom'].value_counts().sort_index(ascending=True))
 
 
 if __name__ == "__main__":
