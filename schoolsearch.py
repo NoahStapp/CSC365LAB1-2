@@ -72,9 +72,9 @@ def main():
         ].isnumeric():
             if len(user_input) == 3:
                 if user_input[2] == "H" or user_input[2] == "High":
-                    minMaxGradeLevel(students, int(user_input[1]), "max")
+                    minMaxGradeLevel(students, teachers, int(user_input[1]), "max")
                 elif user_input[2] == "L" or user_input[2] == "Low":
-                    minMaxGradeLevel(students, int(user_input[1]), "min")
+                    minMaxGradeLevel(students, teachers, int(user_input[1]), "min")
             else:
                 gradeLevel(students, int(user_input[1]))
 
@@ -128,35 +128,34 @@ def avgGradeLevel(students, grade):
     print(students.loc[students["grade"] == grade]["GPA"].mean())
 
 
-def minMaxGradeLevel(students, grade, flag):
-
+def minMaxGradeLevel(students, teachers, grade, flag):
     if students[students["grade"] == grade].size:
         if flag == "max":
-            print(
-                students.loc[students.loc[students["grade"] == grade]["GPA"].idxmax()][
-                    [
-                        "lastName",
-                        "firstName",
-                        "GPA",
-                        "teacherLastName",
-                        "teacherFirstName",
-                        "bus",
-                    ]
-                ].values
-            )
+            dataFromStudents = students.loc[
+                students.loc[students["grade"] == grade]["GPA"].idxmax()
+            ][["lastName", "firstName", "GPA", "bus", "classroom"]].values
+            if len(dataFromStudents) > 0:
+                dataFromTeachers = teachers.loc[
+                    teachers["classroom"] == dataFromStudents[4]
+                ][["lastName", "firstName"]].values
+
+                dataFromStudents = np.delete(dataFromStudents, 4)
+
+                data = np.r_[dataFromStudents, dataFromTeachers[0]]
+                print(data)
         else:
-            print(
-                students.loc[students.loc[students["grade"] == grade]["GPA"].idxmin()][
-                    [
-                        "lastName",
-                        "firstName",
-                        "GPA",
-                        "teacherLastName",
-                        "teacherFirstName",
-                        "bus",
-                    ]
-                ].values
-            )
+            dataFromStudents = students.loc[
+                students.loc[students["grade"] == grade]["GPA"].idxmin()
+            ][["lastName", "firstName", "GPA", "bus", "classroom"]].values
+            if len(dataFromStudents) > 0:
+                dataFromTeachers = teachers.loc[
+                    teachers["classroom"] == dataFromStudents[4]
+                ][["lastName", "firstName"]].values
+
+                dataFromStudents = np.delete(dataFromStudents, 4)
+
+                data = np.r_[dataFromStudents, dataFromTeachers[0]]
+                print(data)
 
 
 def studentsPerGrade(students, grade):
