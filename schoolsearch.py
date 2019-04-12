@@ -37,7 +37,7 @@ def createTeachers(inputFile):
 def main():
     students = createStudents("list.txt")
     teachers = createTeachers("teachers.txt")
-
+    
     while 1:
         user_input = input("").split(" ")
 
@@ -88,13 +88,13 @@ def main():
                 teachersPerClassroom(students, teachers, int(user_input[2]))
         elif(user_input[0] == "E" or user_input[0] == "Enrollment"):
             enrollmentByClassroom(students, teachers)
-
-            
-
-        elif (user_input[0] == "D:" or user_input[0] == "Data:"):
+        elif(user_input[0] == "R:" or user_input[0] == "RangeQuartiles:"):
             if (user_input[1] == "G" or user_input[1] == "Grade"):
-                if(user_input[2] == "A" or user_input[2] == "Average"):
-                    calculateMeanGPA(students, teachers, "level")
+                IQR(students, teachers, "grade")
+            if (user_input[1] == "B" or user_input[1] == "Bus"):
+                IQR(students, teachers, "bus")
+            if (user_input[1] == "T" or user_input[1] == "Teacher"):
+                IQR(students, teachers, "teacher")
 
 
 
@@ -198,13 +198,20 @@ def teachersPerGrade(students, teachers, grade):
 # NR-4
 def enrollmentByClassroom(students, teachers):
     print(students['classroom'].value_counts().sort_index(ascending=True))
-    
+
 def calculateMeanGPA(students, teachers, field):
-    if field == "level":
+    if field == "grade":
         for i in range(0, 7):
             print("Average GPA of grade ", i, ": ", students.loc[students["grade"] == i]["GPA"].mean())
 
-
+def IQR(students, teachers, field):
+    if field == "grade":
+        print(students.groupby('grade').quantile([0.25, 0.5, 0.75])['GPA'])
+    if field == "bus":
+        print(students.groupby('bus').quantile([0.25, 0.5, 0.75])['GPA'])
+    if field == "teacher":
+        complete_df = pd.merge(teachers, students, on="classroom")
+        print(complete_df.groupby(['lastName_x', 'firstName_x']).quantile([0.25, 0.5, 0.75])['GPA'])
 
 if __name__ == "__main__":
     main()
