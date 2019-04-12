@@ -91,14 +91,24 @@ def main():
                 teachersPerClassroom(students, teachers, int(user_input[2]))
         elif user_input[0] == "E" or user_input[0] == "Enrollment":
             enrollmentByClassroom(students, teachers)
+        elif user_input[0] == "R:" or user_input[0] == "RangeQuartiles:":
+            if user_input[1] == "G" or user_input[1] == "Grade":
+                IQR(students, teachers, "grade")
+            if user_input[1] == "B" or user_input[1] == "Bus":
+                IQR(students, teachers, "bus")
+            if user_input[1] == "T" or user_input[1] == "Teacher":
+                IQR(students, teachers, "teacher")
 
-        elif (user_input[0] == "D:" or user_input[0] == "Deviation:") and len(user_input) == 2:
+        elif (user_input[0] == "D:" or user_input[0] == "Deviation:") and len(
+            user_input
+        ) == 2:
             if user_input[1] == "G" or user_input[1] == "Grade":
                 standardDeviation(students, teachers, "grade")
             elif user_input[1] == "B" or user_input[1] == "Bus":
                 standardDeviation(students, teachers, "bus")
             elif user_input[1] == "T" or user_input[1] == "Teacher":
                 standardDeviation(students, teachers, "teacher")
+
 
 def studentInfo(students, teachers, name):
     dataFromStudents = students.loc[students["lastName"] == name][
@@ -210,6 +220,32 @@ def enrollmentByClassroom(students, teachers):
     print(students["classroom"].value_counts().sort_index(ascending=True))
 
 
+def calculateMeanGPA(students, teachers, field):
+    if field == "grade":
+        for i in range(0, 7):
+            print(
+                "Average GPA of grade ",
+                i,
+                ": ",
+                students.loc[students["grade"] == i]["GPA"].mean(),
+            )
+
+
+# NR-5, calculate IQR for GPA of an analytic field
+def IQR(students, teachers, field):
+    if field == "grade":
+        print(students.groupby("grade").quantile([0.25, 0.5, 0.75])["GPA"])
+    if field == "bus":
+        print(students.groupby("bus").quantile([0.25, 0.5, 0.75])["GPA"])
+    if field == "teacher":
+        complete_df = pd.merge(teachers, students, on="classroom")
+        print(
+            complete_df.groupby(["lastName_x", "firstName_x"]).quantile(
+                [0.25, 0.5, 0.75]
+            )["GPA"]
+        )
+
+
 # NR-5, calculate mean GPA of an analytic field
 def calculateMeanGPA(students, teachers, field):
     if field == "grade":
@@ -220,6 +256,7 @@ def calculateMeanGPA(students, teachers, field):
                 ": ",
                 students.loc[students["grade"] == i]["GPA"].mean(),
             )
+
 
 # NR-5, calculate standard deviation of an analytic field
 def standardDeviation(students, teachers, field):
@@ -235,8 +272,7 @@ def standardDeviation(students, teachers, field):
                 sum(standard_deviations) / len(standard_deviations)
             )
             print("Standard deviation of grade ", i, ": ", standard_deviation)
-    elif field == "bus":
-        
+    # elif field == "bus":
 
 
 if __name__ == "__main__":
