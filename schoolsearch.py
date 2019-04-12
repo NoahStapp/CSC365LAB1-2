@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import itertools
+import math
 
 
 class Student:
@@ -77,16 +78,18 @@ def main():
                     minMaxGradeLevel(students, teachers, int(user_input[1]), "min")
             else:
                 gradeLevel(students, int(user_input[1]))
-        elif(user_input[0] == "G:" or user_input[0] == "Grade:" and (user_input[
-            1] == "Teachers" or user_input[
-            1] == "T")):
+        elif (
+            user_input[0] == "G:"
+            or user_input[0] == "Grade:"
+            and (user_input[1] == "Teachers" or user_input[1] == "T")
+        ):
             teachersPerGrade(students, teachers, int(user_input[2]))
-        elif (user_input[0] == "C:" or user_input[0] == "Classroom:"):
-            if(user_input[1] == "Students" or user_input[1] == "S"):
+        elif user_input[0] == "C:" or user_input[0] == "Classroom:":
+            if user_input[1] == "Students" or user_input[1] == "S":
                 studentsPerClassroom(students, teachers, int(user_input[2]))
-            elif(user_input[1] == "Teachers" or user_input[1] == "T"):
+            elif user_input[1] == "Teachers" or user_input[1] == "T":
                 teachersPerClassroom(students, teachers, int(user_input[2]))
-        elif(user_input[0] == "E" or user_input[0] == "Enrollment"):
+        elif user_input[0] == "E" or user_input[0] == "Enrollment":
             enrollmentByClassroom(students, teachers)
         elif(user_input[0] == "R:" or user_input[0] == "RangeQuartiles:"):
             if (user_input[1] == "G" or user_input[1] == "Grade"):
@@ -180,20 +183,28 @@ def minMaxGradeLevel(students, teachers, grade, flag):
 def studentsPerGrade(students, grade):
     print(grade, ": ", len(students.loc[students["grade"] == grade].values))
 
+
 # NR-1
-def studentsPerClassroom(students, teachers, classroom): 
-    student = students.loc[students['classroom'] == classroom][['lastName', 'firstName']]
+def studentsPerClassroom(students, teachers, classroom):
+    student = students.loc[students["classroom"] == classroom][
+        ["lastName", "firstName"]
+    ]
     print(student.values)
-    
+
+
 # NR-2
 def teachersPerClassroom(students, teachers, classroom):
-    teacher = teachers.loc[teachers['classroom'] == classroom][['lastName', 'firstName']]
+    teacher = teachers.loc[teachers["classroom"] == classroom][
+        ["lastName", "firstName"]
+    ]
     print(teacher.values)
+
 
 # NR-3
 def teachersPerGrade(students, teachers, grade):
-    classrooms = list(set(students[students['grade'] == grade]['classroom'].values))
-    print(teachers[teachers['classroom'].isin(classrooms)].values)
+    classrooms = list(set(students[students["grade"] == grade]["classroom"].values))
+    print(teachers[teachers["classroom"].isin(classrooms)].values)
+
 
 # NR-4
 def enrollmentByClassroom(students, teachers):
@@ -204,6 +215,7 @@ def calculateMeanGPA(students, teachers, field):
         for i in range(0, 7):
             print("Average GPA of grade ", i, ": ", students.loc[students["grade"] == i]["GPA"].mean())
 
+# NR-5, calculate IQR for GPA of an analytic field
 def IQR(students, teachers, field):
     if field == "grade":
         print(students.groupby('grade').quantile([0.25, 0.5, 0.75])['GPA'])
@@ -212,6 +224,34 @@ def IQR(students, teachers, field):
     if field == "teacher":
         complete_df = pd.merge(teachers, students, on="classroom")
         print(complete_df.groupby(['lastName_x', 'firstName_x']).quantile([0.25, 0.5, 0.75])['GPA'])
+
+
+# NR-5, calculate mean GPA of an analytic field
+def calculateMeanGPA(students, teachers, field):
+    if field == "level":
+        for i in [1, 2, 3, 4, 6]:
+            print(
+                "Average GPA of grade ",
+                i,
+                ": ",
+                students.loc[students["grade"] == i]["GPA"].mean(),
+            )
+
+# NR-5, calculate standard deviation of an analytic field
+def standardDeviation(students, teachers, field):
+    if field == "level":
+        for i in [1, 2, 3, 4, 6]:
+            mean = 0
+            standard_deviations = []
+            student_gpas = students.loc[students["grade"] == i]["GPA"]
+            mean = sum(student_gpas) / len(student_gpas)
+            for gpa in student_gpas:
+                standard_deviations.append(math.pow(gpa - mean, 2))
+            standard_deviation = math.sqrt(
+                sum(standard_deviations) / len(standard_deviations)
+            )
+            print("Standard deviation of grade ", i, ": ", standard_deviation)
+
 
 if __name__ == "__main__":
     main()
