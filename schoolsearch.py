@@ -220,17 +220,6 @@ def enrollmentByClassroom(students, teachers):
     print(students["classroom"].value_counts().sort_index(ascending=True))
 
 
-def calculateMeanGPA(students, teachers, field):
-    if field == "grade":
-        for i in range(0, 7):
-            print(
-                "Average GPA of grade ",
-                i,
-                ": ",
-                students.loc[students["grade"] == i]["GPA"].mean(),
-            )
-
-
 # NR-5, calculate IQR for GPA of an analytic field
 def IQR(students, teachers, field):
     if field == "grade":
@@ -261,18 +250,14 @@ def calculateMeanGPA(students, teachers, field):
 # NR-5, calculate standard deviation of an analytic field
 def standardDeviation(students, teachers, field):
     if field == "grade":
-        for i in [1, 2, 3, 4, 6]:
-            mean = 0
-            standard_deviations = []
-            student_gpas = students.loc[students["grade"] == i]["GPA"]
-            mean = sum(student_gpas) / len(student_gpas)
-            for gpa in student_gpas:
-                standard_deviations.append(math.pow(gpa - mean, 2))
-            standard_deviation = math.sqrt(
-                sum(standard_deviations) / len(standard_deviations)
-            )
-            print("Standard deviation of grade ", i, ": ", standard_deviation)
-    # elif field == "bus":
+        print(students.groupby("grade")["GPA"].agg(np.std, ddof=0))
+    elif field == "bus":
+        print(students.groupby("bus")["GPA"].agg(np.std, ddof=0))
+    elif field == "teacher":
+        complete_df = pd.merge(teachers, students, on="classroom")
+        print(
+            complete_df.groupby(["lastName_x", "firstName_x"])["GPA"].agg(np.std, ddof=0)
+        )
 
 
 if __name__ == "__main__":
