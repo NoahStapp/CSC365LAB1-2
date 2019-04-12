@@ -248,12 +248,12 @@ def IQR(students, teachers, field):
 # NR-5, calculate mean GPA of an analytic field
 def calculateMeanGPA(students, teachers, field):
     if field == "grade":
-        print(students.groupby('grade')['GPA'].mean())
+        print(students.groupby("grade")["GPA"].mean())
     if field == "bus":
-        print(students.groupby('bus')['GPA'].mean())
+        print(students.groupby("bus")["GPA"].mean())
     if field == "teacher":
         complete_df = pd.merge(teachers, students, on="classroom")
-        print(complete_df.groupby(["lastName_x", "firstName_x"])['GPA'].mean())
+        print(complete_df.groupby(["lastName_x", "firstName_x"])["GPA"].mean())
 
 
 # NR-5, calculate standard deviation of an analytic field
@@ -265,7 +265,9 @@ def standardDeviation(students, teachers, field):
     elif field == "teacher":
         complete_df = pd.merge(teachers, students, on="classroom")
         print(
-            complete_df.groupby(["lastName_x", "firstName_x"])["GPA"].agg(np.std, ddof=0)
+            complete_df.groupby(["lastName_x", "firstName_x"])["GPA"].agg(
+                np.std, ddof=0
+            )
         )
 
 
