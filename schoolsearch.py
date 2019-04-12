@@ -198,6 +198,7 @@ def teachersPerGrade(students, teachers, grade):
 # NR-4
 def enrollmentByClassroom(students, teachers):
     print(students['classroom'].value_counts().sort_index(ascending=True))
+    
 def calculateMeanGPA(students, teachers, field):
     if field == "level":
         for i in range(0, 7):
