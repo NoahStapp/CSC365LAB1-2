@@ -66,7 +66,7 @@ def main():
         ):
             avgGradeLevel(students, int(user_input[1]))
         elif user_input[0] == "I" or user_input[0] == "Info":
-            for i in range(0, 7):
+            for i in [1, 2, 3, 4, 6]:
                 studentsPerGrade(students, i)
         elif (user_input[0] == "G:" or user_input[0] == "Grade:") and user_input[
             1
@@ -92,11 +92,13 @@ def main():
         elif user_input[0] == "E" or user_input[0] == "Enrollment":
             enrollmentByClassroom(students, teachers)
 
-        elif user_input[0] == "D:" or user_input[0] == "Data:":
+        elif (user_input[0] == "D:" or user_input[0] == "Deviation:") and len(user_input) == 2:
             if user_input[1] == "G" or user_input[1] == "Grade":
-                calculateMeanGPA(students, teachers, "level")
-                standardDeviation(students, teachers, "level")
-
+                standardDeviation(students, teachers, "grade")
+            elif user_input[1] == "B" or user_input[1] == "Bus":
+                standardDeviation(students, teachers, "bus")
+            elif user_input[1] == "T" or user_input[1] == "Teacher":
+                standardDeviation(students, teachers, "teacher")
 
 def studentInfo(students, teachers, name):
     dataFromStudents = students.loc[students["lastName"] == name][
@@ -210,7 +212,7 @@ def enrollmentByClassroom(students, teachers):
 
 # NR-5, calculate mean GPA of an analytic field
 def calculateMeanGPA(students, teachers, field):
-    if field == "level":
+    if field == "grade":
         for i in [1, 2, 3, 4, 6]:
             print(
                 "Average GPA of grade ",
@@ -221,7 +223,7 @@ def calculateMeanGPA(students, teachers, field):
 
 # NR-5, calculate standard deviation of an analytic field
 def standardDeviation(students, teachers, field):
-    if field == "level":
+    if field == "grade":
         for i in [1, 2, 3, 4, 6]:
             mean = 0
             standard_deviations = []
@@ -233,6 +235,8 @@ def standardDeviation(students, teachers, field):
                 sum(standard_deviations) / len(standard_deviations)
             )
             print("Standard deviation of grade ", i, ": ", standard_deviation)
+    elif field == "bus":
+        
 
 
 if __name__ == "__main__":
