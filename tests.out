@@ -167,3 +167,65 @@
 
 // TC-33
 // output: Program terminates
+
+// TC-34
+// output: [
+  ['WORBINGTON' 'DEEDRA']
+  ['SPANICEK' 'KENDRA']
+  ['GUICE' 'CODI']
+  ['GLOR' 'HUNG']
+  ['GUM' 'NOAH']
+  ['NOVICK' 'ROLLAND']
+  ['DELUNA' 'KRYSTAL']
+  ['COMO' 'ZANDRA']
+]
+
+// TC-35
+// output: [
+  ['WORBINGTON' 'DEEDRA']
+  ['SPANICEK' 'KENDRA']
+  ['GUICE' 'CODI']
+  ['GLOR' 'HUNG']
+  ['GUM' 'NOAH']
+  ['NOVICK' 'ROLLAND']
+  ['DELUNA' 'KRYSTAL']
+  ['COMO' 'ZANDRA']
+]
+
+// TC-36
+// output: []
+
+// TC-37
+// output: prompts again, no output
+
+// TC-38
+// output: [['CHIONCHIO' 'PERLA']]
+
+// TC-39
+// output: [['CHIONCHIO' 'PERLA']]
+
+// TC-40
+// output: []
+
+// TC-41
+// output: prompts again, no output
+
+// TC-42
+// output: [
+  ['COOL' 'REUBEN' 101]
+  ['HANTZ' 'JED' 105]
+  ['CHIONCHIO' 'PERLA' 112]
+ ]
+
+// TC-43
+// output: [
+  ['COOL' 'REUBEN' 101]
+  ['HANTZ' 'JED' 105]
+  ['CHIONCHIO' 'PERLA' 112]
+ ]
+
+// TC-44
+// output: []
+
+// TC-45
+// output: prompts again, no output
