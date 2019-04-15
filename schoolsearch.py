@@ -79,12 +79,12 @@ def main():
             else:
                 gradeLevel(students, int(user_input[1]))
         elif (
-            user_input[0] == "G:"
-            or user_input[0] == "Grade:"
+            (user_input[0] == "G:" or user_input[0] == "Grade:")
             and (user_input[1] == "Teachers" or user_input[1] == "T")
+            and len(user_input) == 3
         ):
             teachersPerGrade(students, teachers, int(user_input[2]))
-        elif user_input[0] == "C:" or user_input[0] == "Classroom:":
+        elif (user_input[0] == "C:" or user_input[0] == "Classroom:") and len(user_input) == 3 and user_input[2].isnumeric():
             if user_input[1] == "Students" or user_input[1] == "S":
                 studentsPerClassroom(students, teachers, int(user_input[2]))
             elif user_input[1] == "Teachers" or user_input[1] == "T":
@@ -227,7 +227,7 @@ def teachersPerGrade(students, teachers, grade):
 
 # NR-4
 def enrollmentByClassroom(students, teachers):
-    print(students["classroom"].value_counts().sort_index(ascending=True))
+    print(students["classroom"].value_counts().sort_index(ascending=True).to_string())
 
 
 # NR-5, calculate IQR for GPA of an analytic field

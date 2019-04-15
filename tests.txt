@@ -1,5 +1,5 @@
 // CSC 365. Spring 2019
-// Lab 1-1 test suite
+// Lab 1-2 test suite
 
 // TC-1
 // Tests Requirements R3, R4
@@ -295,9 +295,114 @@ Info
 
 I
 
-// TC-33
-// Tests Requirements R11
-// quitting command
-// expected action: [quits]
+// TC-34
+// Tests Requirement NR1
+// short form command for students enrolled in a classroom
+// expected output: [
+  ['WORBINGTON' 'DEEDRA']
+  ['SPANICEK' 'KENDRA']
+  ['GUICE' 'CODI']
+  ['GLOR' 'HUNG']
+  ['GUM' 'NOAH']
+  ['NOVICK' 'ROLLAND']
+  ['DELUNA' 'KRYSTAL']
+  ['COMO' 'ZANDRA']
+]
 
-Q
+C: S 112
+
+
+// TC-35
+// Tests Requirement NR1
+// long form command for students enrolled in a classroom
+// expected output: [
+  ['WORBINGTON' 'DEEDRA']
+  ['SPANICEK' 'KENDRA']
+  ['GUICE' 'CODI']
+  ['GLOR' 'HUNG']
+  ['GUM' 'NOAH']
+  ['NOVICK' 'ROLLAND']
+  ['DELUNA' 'KRYSTAL']
+  ['COMO' 'ZANDRA']
+]
+
+Classroom: Students 112
+
+// TC-36
+// Tests Requirements NR1
+// short form invalid command for students enrolled in a classroom
+// expected output: []
+
+C: S 200
+
+// TC-37
+// Tests Requirements NR1
+// long form invalid command for students enrolled in a classroom
+// expected action: prompts again, no output
+
+Classroom: Student Smith
+
+// TC-38
+// Tests Requirement NR2
+// short form command for teachers teaching a classroom
+// expected output: [['CHIONCHIO' 'PERLA']]
+
+C: T 112
+
+
+// TC-39
+// Tests Requirement NR2
+// long form command for teachers teaching a classroom
+// expected output: [['CHIONCHIO' 'PERLA']]
+
+Classroom: Teachers 112
+
+// TC-40
+// Tests Requirements NR2
+// short form invalid command for teachers teaching a classroom
+// expected output: []
+
+C: T 200
+
+// TC-41
+// Tests Requirements NR2
+// long form invalid command for teachers teaching a classroom
+// expected action: prompts again, no output
+
+Classroom: Teacher Smith
+
+// TC-42
+// Tests Requirement NR3
+// short form command for teachers teaching a grade
+// expected output: [
+  ['COOL' 'REUBEN' 101]
+  ['HANTZ' 'JED' 105]
+  ['CHIONCHIO' 'PERLA' 112]
+ ]
+
+G: T 4
+
+// TC-43
+// Tests Requirement NR3
+// long form command for teachers teaching a grade
+// expected output: [
+  ['COOL' 'REUBEN' 101]
+  ['HANTZ' 'JED' 105]
+  ['CHIONCHIO' 'PERLA' 112]
+ ]
+
+Grade: Teachers 4 
+
+// TC-44
+// Tests Requirements NR3
+// short form invalid command for teachers teaching a grade
+// expected output: []
+
+G: T 10
+
+// TC-45
+// Tests Requirements NR3
+// long form invalid command for teachers teaching a grade
+// expected action: prompts again, no output
+
+Grade: Teacher Smith
