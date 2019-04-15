@@ -406,3 +406,55 @@ G: T 10
 // expected action: prompts again, no output
 
 Grade: Teacher Smith
+
+// TC-46
+// Tests Requirements NR4
+// short form command for enrollment
+// expected output: 
+    101     1
+    102     5
+    103     2
+    104     2
+    105     6
+    106     2
+    107     7
+    108    11
+    109     5
+    110     2
+    111     9
+    112     8
+
+E
+
+// TC-47
+// Tests Requirements NR4
+// long form command for enrollment
+// expected output: 
+    101     1
+    102     5
+    103     2
+    104     2
+    105     6
+    106     2
+    107     7
+    108    11
+    109     5
+    110     2
+    111     9
+    112     8
+
+Enrollment
+
+// TC-48
+// Tests Requirements NR4
+// short form invalid command for enrollment
+// expected action: prompts again, no output
+
+E 50
+
+// TC-49
+// Tests Requirements NR4
+// long form invalid command for enrollment
+// expected action: prompts again, no output
+
+Enrollment: 50
