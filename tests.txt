@@ -406,3 +406,194 @@ G: T 10
 // expected action: prompts again, no output
 
 Grade: Teacher Smith
+
+// TC-50
+// Tests Requirements NR5
+// short form to get IQR and quartiles for GPAs per grade level
+// expected output: [grade      
+                    1      0.25    2.9225
+                          0.50    2.9950
+                          0.75    3.0675
+                    2      0.25    2.8800
+                          0.50    2.9200
+                          0.75    3.0100
+                    3      0.25    2.9100
+                          0.50    3.1100
+                          0.75    3.1200
+                    4      0.25    2.8550
+                          0.50    2.9700
+                          0.75    3.0100
+                    6      0.25    2.8500
+                          0.50    2.9300
+                          0.75    3.1300
+                    Name: GPA, dtype: float64]
+
+R: G
+
+// TC-51
+// Tests Requirements NR5
+// long form to get IQR and quartiles for GPAs per teacher
+// expected output: [lastName_x  firstName_x
+                    ALPERT      JONATHAN       3.2000
+                    BODZIONY    LUZ            3.1200
+                    CHIONCHIO   PERLA          3.0050
+                    COOL        REUBEN         2.9100
+                    FAFARD      ROCIO          3.1150
+                    FALKER      ADOLPH         3.0675
+                    GAMBREL     JAE            3.1400
+                    HAMER       GAVIN          3.0300
+                    HANTZ       JED            3.0500
+                    KERBS       BENITO         3.1000
+                    NISTENDIRK  NANCY          3.0200
+                    STEIB       GALE           2.9100
+                    Name: GPA, dtype: float64]
+
+RangeQuartiles: Teacher
+
+// TC-52
+// Tests Requirements NR5
+// combination of short and long form to get IQR and quartiles for GPAs per bus route
+// expected output: [bus      
+                    0    0.25    2.8400
+                        0.50    2.8800
+                        0.75    3.1175
+                    51   0.25    2.9500
+                        0.50    3.0250
+                        0.75    3.0950
+                    52   0.25    2.8275
+                        0.50    2.8700
+                        0.75    2.9200
+                    53   0.25    3.0000
+                        0.50    3.1000
+                        0.75    3.1200
+                    54   0.25    2.8650
+                        0.50    2.9250
+                        0.75    2.9725
+                    55   0.25    2.8800
+                        0.50    3.1000
+                        0.75    3.2200
+                    56   0.25    2.8500
+                        0.50    2.8850
+                        0.75    2.9800]
+
+R: Bus
+
+// TC-53
+// Tests Requirements NR5
+// invalid input for IQR/quartiles 
+// expected output: None
+
+R: Classroom
+
+// TC-54
+// Tests Requirements NR5
+// use short form to get meanGPA of each bus route
+// expected output: [bus
+                    0     2.952500
+                    51    3.020000
+                    52    2.885000
+                    53    3.055556
+                    54    2.941667
+                    55    3.036667
+                    56    2.921667
+                    Name: GPA, dtype: float64]
+
+M: B
+
+// TC-55
+// Tests Requirements NR5
+// use long form to get meanGPA for each grade
+// expected output: [grade
+                    1    2.995000
+                    2    2.946154
+                    3    3.048889
+                    4    2.951333
+                    6    2.977143
+                    Name: GPA, dtype: float64]
+
+MeanGPA: Grade
+
+
+// TC-56
+// Tests Requirements NR5
+// combination of short and long form to get IQR and quartiles for GPAs per teacher
+// expected output: [lastName_x  firstName_x
+                    ALPERT      JONATHAN       3.170000
+                    BODZIONY    LUZ            3.090000
+                    CHIONCHIO   PERLA          2.985000
+                    COOL        REUBEN         2.910000
+                    FAFARD      ROCIO          3.014286
+                    FALKER      ADOLPH         2.995000
+                    GAMBREL     JAE            2.960000
+                    HAMER       GAVIN          2.954545
+                    HANTZ       JED            2.913333
+                    KERBS       BENITO         2.976000
+                    NISTENDIRK  NANCY          2.962222
+                    STEIB       GALE           2.900000
+                    Name: GPA, dtype: float64]
+
+MeanGPA: T
+
+// TC-57
+// Tests Requirements NR5
+// invalid input for MeanGPA
+// expected output: None
+
+M: 305
+
+// TC-58
+// Tests Requirements NR5
+// use short form to get standard deviation of GPA for each teacher
+// expected output: [lastName_x  firstName_x
+                    ALPERT      JONATHAN       0.060000
+                    BODZIONY    LUZ            0.060000
+                    CHIONCHIO   PERLA          0.060622
+                    COOL        REUBEN         0.000000
+                    FAFARD      ROCIO          0.150889
+                    FALKER      ADOLPH         0.145000
+                    GAMBREL     JAE            0.154532
+                    HAMER       GAVIN          0.127019
+                    HANTZ       JED            0.147271
+                    KERBS       BENITO         0.117405
+                    NISTENDIRK  NANCY          0.153462
+                    STEIB       GALE           0.020000
+                    Name: GPA, dtype: float64]
+
+D: T
+
+// TC-59
+// Tests Requirements NR5
+// use long form to get standard deviation of GPA for each bus route
+// expected output: [bus
+                    0     0.142982
+                    51    0.078102
+                    52    0.087892
+                    53    0.117200
+                    54    0.107690
+                    55    0.179072
+                    56    0.115962
+                    Name: GPA, dtype: float64]
+
+Deviation: Bus
+
+// TC-60
+// Tests Requirements NR5
+// combination of short and long form to get IQR and quartiles for GPAs per grade
+// expected output: [grade
+                    1    0.145000
+                    2    0.118746
+                    3    0.150661
+                    4    0.109232
+                    6    0.144161
+                    Name: GPA, dtype: float64]
+
+D: Grade
+
+// TC-61
+// Tests Requirements NR5
+// invalid input for standardDeviation 
+// expected output: None
+
+Deviation: firstName
+
+
