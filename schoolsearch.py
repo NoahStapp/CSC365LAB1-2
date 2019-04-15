@@ -270,6 +270,5 @@ def standardDeviation(students, teachers, field):
             )
         )
 
-
 if __name__ == "__main__":
     main()
