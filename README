@@ -5,3 +5,17 @@ To run the program, type -
  - into the command line. 
 
 Type in your command and press enter to run it. Type "Q" or "Quit" to quit. 
+
+C[lassroom]: S[tudents] <classroom number> returns a list of all students assigned to the given classroom
+C[lassroom]: T[eachers] <classroom number> returns a list of all teachers assigned to the given classroom
+G[rade]: T[eachers] <grade> returns a list of all teachers who teach the given grade
+E[nrollment] returns the enrollments of all students broken down by classroom
+R[angeQuartiles]: G[rade] returns the quartiles and range of the GPA of students in each grade level
+R[angeQuartiles]: B[us] returns the quartiles and range of the GPA of students in each bus route
+R[angeQuartiles]: T[eacher] returns the quartiles and range of the GPA of students in each teacher's class
+D[eviation]: G[rade] returns the standard deviation of the GPA of students in each grade level
+D[eviation]: B[us] returns the standard deviation of the GPA of students in each bus route
+D[eviation]: T[eacher] returns the standard deviation of the GPA of students in each teacher's class
+M[eanGPA]: G[rade] returns the mean GPA of students in each grade level
+M[eanGPA]: B[us] returns the mean GPA of students in each bus route
+M[eanGPA]: T[eacher] returns the mean GPA of students in each teacher's class
