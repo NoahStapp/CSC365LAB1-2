@@ -229,3 +229,39 @@
 
 // TC-45
 // output: prompts again, no output
+
+// TC-46
+// output: 
+    101     1
+    102     5
+    103     2
+    104     2
+    105     6
+    106     2
+    107     7
+    108    11
+    109     5
+    110     2
+    111     9
+    112     8
+
+// TC-47
+// output: 
+    101     1
+    102     5
+    103     2
+    104     2
+    105     6
+    106     2
+    107     7
+    108    11
+    109     5
+    110     2
+    111     9
+    112     8
+
+// TC-48
+// output: prompts again, no output
+
+// TC-49
+// output: prompts again, no output

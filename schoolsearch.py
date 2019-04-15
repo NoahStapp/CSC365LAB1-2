@@ -89,7 +89,7 @@ def main():
                 studentsPerClassroom(students, teachers, int(user_input[2]))
             elif user_input[1] == "Teachers" or user_input[1] == "T":
                 teachersPerClassroom(students, teachers, int(user_input[2]))
-        elif user_input[0] == "E" or user_input[0] == "Enrollment":
+        elif (user_input[0] == "E" or user_input[0] == "Enrollment") and len(user_input) == 1:
             enrollmentByClassroom(students, teachers)
         elif (user_input[0] == "R:" or user_input[0] == "RangeQuartiles:") and len(
             user_input
